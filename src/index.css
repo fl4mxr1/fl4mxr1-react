@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .font-ex {
+        font-stretch: expanded;
+    }
+}
+
+@keyframes scrollContent {
+    from {
+        transform: translate3d(calc(var(--content-width) * -1), 0, 0);
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes scrollContentInvert {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+    to {
+        transform: translate3d(calc(var(--content-width) * -1), 0, 0);
+    }
+}
