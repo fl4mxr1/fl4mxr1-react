@@ -25,3 +25,15 @@
         transform: translate3d(calc(var(--content-width) * -1), 0, 0);
     }
 }
+
+@keyframes overflowLabelReveal {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    30%, 50% {
+        transform: translate3d(calc(var(--overflow) * -1), 0, 0);
+    }
+    80%, 100% {
+        transform: translate3d(0, 0, 0);
+    }
+}

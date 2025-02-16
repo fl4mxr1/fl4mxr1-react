@@ -1,6 +1,15 @@
+import { useEffect, useRef, useState } from "react";
+
 import MatrixRain from "./components/MatrixRain";
 import Marquee from "./components/Marquee";
-import { useEffect, useRef, useState } from "react";
+
+import Section from "./components/Section";
+import OverflowLabel from "./components/OverflowLabel";
+import Tooltip from "./components/Tooltip";
+import Button from "./components/Button";
+import Modal from "./components/Modal";
+
+import GameDisplay from "./components/mywork/GameDisplay";
 
 const App = () => {
 	const roles = [
@@ -24,7 +33,9 @@ const App = () => {
 	];
 
 	const [scrollTipVisible, setScrollTipVisible] = useState(true);
-	const scrollTipTriggerRef = useRef<HTMLDivElement>(null);
+	const scrollTipTriggerRef = useRef<HTMLDivElement>();
+
+	const [testModalVisible, setTestModalVisible] = useState(false);
 
 	useEffect(() => {
 		const scrollTipTrigger = scrollTipTriggerRef.current;
@@ -57,7 +68,7 @@ const App = () => {
 				<span className="max-sm:hidden">YOU SHOULD SCROLL DOWN... NOW!</span>
 			</div>
 			<MatrixRain className="w-full h-full [mask-image:linear-gradient(to_bottom,black_60%,transparent)] absolute inset-0 opacity-10" />
-			<div className="h-max min-h-full max-w-[750px] w-full text-neutral-100 px-10 absolute left-1/2 -translate-x-1/2">
+			<div className="h-max min-h-full max-w-[900px] w-full text-neutral-100 px-10 absolute left-1/2 -translate-x-1/2">
 				<section className="mb-10 h-dvh flex flex-col justify-center gap-2">
 					<Marquee
 						className="pb-5 w-full text-7xl max-sm:text-5xl transition-[font-size] duration-700 ease-in-out text-green font-display font-black"
@@ -81,7 +92,8 @@ const App = () => {
 					</Marquee>
 					<Marquee
 						className="w-full text-xl text-green font-display"
-						speed={0.25}
+						speed={0.4}
+						invert={true}
 						stopOnHover={true}
 					>
 						{adj.map((v, k) => {
@@ -93,20 +105,58 @@ const App = () => {
 						})}
 					</Marquee>
 				</section>
-				<div ref={scrollTipTriggerRef} className="mt-[3px]"></div>
-				<h1 className="text-3xl font-black">‧₊˚✧ socials !!! ✧˚₊‧</h1>
-				Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis
-				tempore doloremque officia distinctio animi accusamus amet aliquam,
-				itaque quam hic facilis tempora, harum adipisci labore perferendis illo
-				est, sint aliquid rem quia dolore beatae dolorum commodi! Unde, amet
-				cum. Error saepe laudantium ipsa adipisci velit aspernatur
-				exercitationem delectus placeat deleniti et quaerat, corrupti numquam
-				sequi rem quasi pariatur suscipit cum temporibus quae assumenda vero
-				eligendi ex corporis! Quibusdam quisquam magni pariatur maxime dolores
-				esse! Vero quibusdam accusamus exercitationem veniam, voluptates commodi
-				repellat quam ratione corporis sequi architecto nisi in eos eaque
-				officiis culpa. Similique maiores, corporis consectetur molestiae
-				molestias enim!
+				<div ref={scrollTipTriggerRef} className="mt-[3px] sticky"></div>
+				<Section>
+					<h1 className="text-3xl font-black mb-5 text-green">
+						‧₊˚✧ socials !!! ✧˚₊‧
+					</h1>
+					<div className="w-full h-96 bg-green grid grid-cols-5 grid-rows-1">
+						<div className="col-span-2 bg-red">
+							<img src="/img/placeholder.png" alt="hhh" />
+						</div>
+						<div className="col-span-3 bg-red"></div>
+					</div>
+				</Section>
+
+				<Section>
+					<h1 className="text-3xl font-black mb-5 text-green">
+						‧₊˚✧ my work !!! ✧˚₊‧
+					</h1>
+					<GameDisplay previewOnly={false} />
+				</Section>
+
+				<Button
+					onClick={() => {
+						console.log("modal opening");
+						setTestModalVisible(true);
+					}}
+				>
+					Open test modal !!!!
+				</Button>
+				<Modal
+					title={<>Text</>}
+					size="md"
+					visible={testModalVisible}
+					buttons={
+						<>
+							<Button onClick={() => setTestModalVisible(false)}>
+								I HAVE NUTTING !!! 💔
+							</Button>
+						</>
+					}
+				>
+					modal text here!!!!!!!!! i can also put{" "}
+					<span className="text-4xl">BIG TEXT !!!!</span> and{" "}
+					<span className="text-xs">small text....</span>
+					and also some{" "}
+					<Tooltip
+						content={<>this is a tooltip!</>}
+						placement="top"
+						className="underline decoration-wavy decoration-green-50/50"
+					>
+						text with a tooltip!
+					</Tooltip>
+				</Modal>
 			</div>
 		</div>
 	);

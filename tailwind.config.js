@@ -8,10 +8,13 @@ export default {
     colors: {
       "bg": "#000000", 
       "green": "#00ff00", 
+      "green-50": "#007a00", 
       "black": "#000000", 
+      "red": "#ff0000", 
       "w-primary": "rgb(240,240,240)", 
       "w-secondary": "rgba(240,240,240,0.5)", 
-      "w-tertiary": "rgba(200,200,200,0.2)"
+      "w-tertiary": "rgba(200,200,200,0.2)", 
+      "transparent": "transparent"
     }, 
     extend: {
       fontFamily: {

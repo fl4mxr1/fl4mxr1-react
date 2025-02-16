@@ -1,0 +1,14 @@
+{
+    "games": [
+        {
+            "name": "Tesdting !!!11121ummmmm", 
+            "thumbnail": ".../img/placeholder.png", 
+            "startingDate": "01/20/2019", 
+            "endDate": "", 
+            "isCurrentWork": true, 
+            "owners": ["me", "ummm idk"], 
+            "roles": ["Scripter"], 
+            "link": "https://youtube.com/"
+        }
+    ]
+}
