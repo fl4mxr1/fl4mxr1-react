@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 
-import MatrixRain from "./components/MatrixRain";
-import Marquee from "./components/Marquee";
+import MatrixRain from "../components/MatrixRain";
+import Marquee from "../components/Marquee";
 
-import Section from "./components/Section";
-import OverflowLabel from "./components/OverflowLabel";
-import Tooltip from "./components/Tooltip";
-import Button from "./components/Button";
-import Modal from "./components/Modal";
+import Section from "../components/Section";
+import OverflowLabel from "../components/OverflowLabel";
+import Tooltip from "../components/Tooltip";
+import Button from "../components/Button";
+import Modal from "../components/Modal";
 
-import GameDisplay from "./components/mywork/GameDisplay";
+import GameDisplay from "../components/mywork/GameDisplay";
 
 const App = () => {
 	const roles = [
@@ -156,6 +156,7 @@ const App = () => {
 					>
 						text with a tooltip!
 					</Tooltip>
+					<img src="src/img/placeholder.png" alt="big poo" />
 				</Modal>
 			</div>
 		</div>

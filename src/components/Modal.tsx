@@ -22,7 +22,7 @@ const Modal = ({ children, title, buttons, size, visible }: Props) => {
 		<AnimatePresence>
 			{visible && (
 				<motion.div
-					className="text-green font-mono fixed inset-0 w-screen h-screen bg-black/70 flex justify-center items-center"
+					className="text-green font-mono fixed inset-0 w-screen h-screen bg-black/70 flex justify-center items-center p-3 backdrop-blur-md backdrop-brightness-[0.25]"
 					initial={{
 						opacity: 0,
 					}}
@@ -38,13 +38,13 @@ const Modal = ({ children, title, buttons, size, visible }: Props) => {
 						<motion.div
 							className={`px-5 py-3 bg-black border-2 border-green rounded-md ${
 								size === "xl"
-									? "w-[900px]"
+									? "max-w-[900px] w-full"
 									: size === "lg"
-									? "w-[720px]"
+									? "max-w-[720px] w-full"
 									: size === "md"
-									? "w-[550px]"
+									? "max-w-[550px] w-full"
 									: size === "sm"
-									? "w-[300px]"
+									? "max-w-[300px] w-full"
 									: "w-max"
 							}`}
 							style={{
@@ -56,14 +56,17 @@ const Modal = ({ children, title, buttons, size, visible }: Props) => {
 							initial={{
 								transform:
 									"perspective(1500px) rotateY(90deg) rotateX(-50deg) scale(0.5)",
+								filter: "blur(10px) brightness(-100%)",
 							}}
 							exit={{
 								transform:
 									"perspective(1500px) rotateY(90deg) rotateX(-50deg) scale(0.5)",
+								filter: "blur(10px) brightness(-100%)",
 							}}
 							animate={{
 								transform:
 									"perspective(1500px) rotateY(0deg) rotateX(0deg) scale(1)",
+								filter: "blur(0) brightness(100%)",
 							}}
 						>
 							{title != undefined && (

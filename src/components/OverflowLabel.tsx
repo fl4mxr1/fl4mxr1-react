@@ -5,6 +5,7 @@ import {
 	useEffect,
 	useRef,
 } from "react";
+import { motion } from "motion";
 
 interface Props {
 	children?: ReactNode;

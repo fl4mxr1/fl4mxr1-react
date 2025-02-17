@@ -101,7 +101,7 @@ const Tooltip = ({
 							tipRadius={3}
 							width={13}
 							fill="black"
-							stroke="limegreen"
+							stroke="rgb(0,255,0)"
 							strokeWidth={2}
 						/>
 					</div>

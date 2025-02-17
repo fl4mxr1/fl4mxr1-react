@@ -1,8 +1,10 @@
 import OverflowLabel from "../OverflowLabel";
 import Button from "../Button";
 import Tooltip from "../Tooltip";
+import Modal from "../Modal";
 
-import { motion, spring } from "motion/react";
+import { motion } from "motion/react";
+import { useState } from "react";
 
 interface Props {
 	gameInfo: {
@@ -24,6 +26,7 @@ interface Props {
 }
 
 const GameDisplayItem = ({ gameInfo }: Props) => {
+	const [linkConfirmModalOn, setLinkConfirmModalOn] = useState(false);
 	return (
 		<motion.div
 			className="bg-black border-2 border-green rounded-xl aspect-[10/7] relative"
@@ -65,7 +68,8 @@ const GameDisplayItem = ({ gameInfo }: Props) => {
 					>
 						<Button
 							onClick={() => {
-								window.open(gameInfo.game.link);
+								//window.open(gameInfo.game.link);
+								setLinkConfirmModalOn(true);
 							}}
 						>
 							CHECK IT OUT!
@@ -85,6 +89,36 @@ const GameDisplayItem = ({ gameInfo }: Props) => {
 					</div>
 				</div>
 			</div>
+			<Modal
+				title={<>Confirmation</>}
+				buttons={
+					<>
+						<Button
+							onClick={() => {
+								window.open(gameInfo.game.link);
+								setLinkConfirmModalOn(false);
+							}}
+						>
+							yeah
+						</Button>
+						<Button
+							priority={1}
+							onClick={() => {
+								setLinkConfirmModalOn(false);
+							}}
+						>
+							nuh uh
+						</Button>
+					</>
+				}
+				visible={linkConfirmModalOn}
+			>
+				this link is taking you to the following page:
+				<div className="px-3 py-2 my-3 bg-green/5 rounded-full">
+					{gameInfo.game.link}
+				</div>
+				are you <i>sure</i> you'd like to go?
+			</Modal>
 		</motion.div>
 	);
 };

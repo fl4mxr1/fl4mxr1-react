@@ -1,8 +1,7 @@
 import GameDisplayItem from "./GameDisplayItem";
 import GameSearch from "./GameSearch";
-import Button from "../Button";
 
-import { AnimatePresence } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useMemo, useState } from "react";
 
 interface Props {
@@ -130,7 +129,7 @@ const GameDisplayGrid = ({ filteringEnabled, previewOnly }: Props) => {
 	return (
 		<div>
 			<GameSearch onChange={onChange} />
-			<div className="grid grid-cols-2 max-sm:grid-cols-1 auto-rows-min max-sm:max-w-[455px] gap-2 h-[900px]">
+			<div className="grid grid-cols-2 max-sm:grid-cols-1 auto-rows-min max-sm:max-w-[455px] gap-2 h-[900px] overflow-hidden">
 				<AnimatePresence>
 					{gamesToDisplay.map((v, k) => {
 						return <GameDisplayItem gameInfo={v} key={k} />;
