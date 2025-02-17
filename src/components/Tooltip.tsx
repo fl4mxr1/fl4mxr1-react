@@ -29,7 +29,7 @@ const Tooltip = ({
 	className,
 }: Props) => {
 	const [isOpen, setIsOpen] = useState(false);
-	const arrowRef = useRef();
+	const arrowRef = useRef<SVGSVGElement>(null);
 	const { refs, floatingStyles, context } = useFloating({
 		whileElementsMounted: autoUpdate,
 		middleware: [

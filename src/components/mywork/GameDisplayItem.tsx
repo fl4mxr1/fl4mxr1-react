@@ -6,23 +6,25 @@ import Modal from "../Modal";
 import { motion } from "motion/react";
 import { useState } from "react";
 
-interface Props {
-	gameInfo: {
-		game: {
-			name: string;
-			thumbnail: string;
-			link?: string;
-		};
-		working: {
-			startingDate: string;
-			endDate?: string;
-			isCurrentWork?: boolean;
-		};
-		me: {
-			owners: string[];
-			roles: string[];
-		};
+interface GameInfoProp {
+	game: {
+		name: string;
+		thumbnail: string;
+		link?: string;
 	};
+	working: {
+		startingDate: string;
+		endDate?: string;
+		isCurrentWork?: boolean;
+	};
+	me: {
+		owners: string[];
+		roles: string[];
+	};
+}
+
+interface Props {
+	gameInfo: GameInfoProp;
 }
 
 const GameDisplayItem = ({ gameInfo }: Props) => {

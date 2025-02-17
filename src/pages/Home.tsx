@@ -4,7 +4,6 @@ import MatrixRain from "../components/MatrixRain";
 import Marquee from "../components/Marquee";
 
 import Section from "../components/Section";
-import OverflowLabel from "../components/OverflowLabel";
 import Tooltip from "../components/Tooltip";
 import Button from "../components/Button";
 import Modal from "../components/Modal";
@@ -33,7 +32,7 @@ const App = () => {
 	];
 
 	const [scrollTipVisible, setScrollTipVisible] = useState(true);
-	const scrollTipTriggerRef = useRef<HTMLDivElement>();
+	const scrollTipTriggerRef = useRef<HTMLDivElement>(null);
 
 	const [testModalVisible, setTestModalVisible] = useState(false);
 
@@ -42,8 +41,10 @@ const App = () => {
 		const intersectObs = new IntersectionObserver((entries) => {
 			setScrollTipVisible(!entries[0].isIntersecting);
 		});
-		intersectObs.observe(scrollTipTrigger);
-		return () => intersectObs.disconnect;
+		if (scrollTipTrigger) {
+			intersectObs.observe(scrollTipTrigger);
+		}
+		return () => intersectObs.disconnect();
 	}, [scrollTipTriggerRef]);
 
 	return (

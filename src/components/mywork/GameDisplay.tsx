@@ -1,12 +1,29 @@
 import GameDisplayItem from "./GameDisplayItem";
 import GameSearch from "./GameSearch";
 
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence } from "motion/react";
 import { useMemo, useState } from "react";
 
 interface Props {
 	filteringEnabled?: boolean;
 	previewOnly?: boolean;
+}
+
+interface GameInfo {
+	game: {
+		name: string;
+		thumbnail: string;
+		link?: string;
+	};
+	working: {
+		startingDate: string;
+		endDate: string;
+		isCurrentWork: boolean;
+	};
+	me: {
+		owners: string[];
+		roles: string[];
+	};
 }
 
 const games = [
@@ -112,7 +129,7 @@ const games = [
 const GameDisplayGrid = ({ filteringEnabled, previewOnly }: Props) => {
 	const [searchPrompt, setSearchPrompt] = useState("");
 	const gamesToDisplay = useMemo(() => {
-		const filtered: object[] = [];
+		const filtered: GameInfo[] = [];
 		const loweredSearchPrompt = searchPrompt.toLowerCase();
 		games.forEach((v, k) => {
 			const gameName = v.game.name.toLowerCase();
@@ -123,16 +140,22 @@ const GameDisplayGrid = ({ filteringEnabled, previewOnly }: Props) => {
 		return filtered;
 	}, [searchPrompt]);
 
-	const onChange = (e: React.ChangeEvent) => {
+	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchPrompt(e.target.value);
 	};
+	console.log(previewOnly);
 	return (
 		<div>
-			<GameSearch onChange={onChange} />
+			{filteringEnabled && <GameSearch onChange={onChange} />}
 			<div className="grid grid-cols-2 max-sm:grid-cols-1 auto-rows-min max-sm:max-w-[455px] gap-2 h-[900px] overflow-hidden">
 				<AnimatePresence>
 					{gamesToDisplay.map((v, k) => {
-						return <GameDisplayItem gameInfo={v} key={k} />;
+						return (
+							<GameDisplayItem
+								gameInfo={{ game: v.game, working: v.working, me: v.me }}
+								key={k}
+							/>
+						);
 					})}
 				</AnimatePresence>
 			</div>

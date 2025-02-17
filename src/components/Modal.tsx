@@ -1,6 +1,5 @@
 import { type ReactNode } from "react";
 import { createPortal } from "react-dom";
-import Button from "./Button";
 import { AnimatePresence, motion } from "motion/react";
 
 interface Props {

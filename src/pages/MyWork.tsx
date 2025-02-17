@@ -1,5 +1,3 @@
-import React from "react";
-
 const MyWork = () => {
 	return <div>MyWork</div>;
 };

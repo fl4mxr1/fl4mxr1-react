@@ -1,20 +1,11 @@
-import { useState } from "react";
+// const Image = ({ src, alt, draggable, className }: Props) => {
+// 	//const [loaded, setLoaded] = useState(false);
+// 	return (
+// 		<span>
+// 			<img src={src} alt={alt} draggable={draggable} className={className} />
+// 			<div className="w-full h-full"></div>
+// 		</span>
+// 	);
+// };
 
-interface Props {
-	src: string;
-	alt: string;
-	draggable: boolean;
-	className: string;
-}
-
-const Image = ({ src, alt, draggable, className }) => {
-	const [loaded, setLoaded] = useState(false);
-	return (
-		<span>
-			<img src={src} alt={alt} draggable={draggable} className={className} />
-			<div className="w-full h-full"></div>
-		</span>
-	);
-};
-
-export default Image;
+// export default Image;

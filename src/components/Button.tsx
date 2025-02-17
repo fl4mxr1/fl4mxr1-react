@@ -4,7 +4,7 @@ interface Props {
 	children?: ReactNode;
 	priority?: number;
 	className?: string;
-	onClick?: () => undefined;
+	onClick?: () => void;
 }
 
 const Button = ({ children, priority, className, onClick }: Props) => {

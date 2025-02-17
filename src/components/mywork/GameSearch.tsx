@@ -1,7 +1,7 @@
 import GameSearchFilterDropDown from "./GameSearchFilterDropDown";
 
 interface Props {
-	onChange: (e: React.ChangeEvent) => void;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const GameSearch = ({ onChange }: Props) => {

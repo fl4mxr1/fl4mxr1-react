@@ -5,7 +5,7 @@ import {
 	useEffect,
 	useRef,
 } from "react";
-import { motion } from "motion";
+//import { motion } from "motion";
 
 interface Props {
 	children?: ReactNode;
@@ -13,12 +13,12 @@ interface Props {
 }
 
 const OverflowLabel = ({ children, className }: Props) => {
-	const [isOverflowing, setIsOverflowing] = useState(false);
+	//const [isOverflowing, setIsOverflowing] = useState(false);
 	const [overflow, setOverflow] = useState(0);
 	const [animEnabled, setAnimEnabled] = useState(false);
 
-	const containerRef = useRef<HTMLDivElement>();
-	const contentRef = useRef<HTMLDivElement>();
+	const containerRef = useRef<HTMLDivElement>(null);
+	const contentRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		const container = containerRef.current;
@@ -28,14 +28,18 @@ const OverflowLabel = ({ children, className }: Props) => {
 			const containerWidth = container?.clientWidth || 0;
 			const contentWidth = content?.clientWidth || 0;
 			const diff = contentWidth - containerWidth;
-			setIsOverflowing(diff > 0);
+			//setIsOverflowing(diff > 0);
 			setOverflow(Math.max(0, diff));
 		}
 
 		calc();
 		const resizeObs = new ResizeObserver(calc);
-		resizeObs.observe(container);
-		resizeObs.observe(content);
+		if (container) {
+			resizeObs.observe(container);
+		}
+		if (content) {
+			resizeObs.observe(content);
+		}
 		document.addEventListener("resize", calc);
 
 		return () => {
