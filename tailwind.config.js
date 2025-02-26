@@ -21,9 +21,16 @@ export default {
         mono: ["JetBrains Mono", "monospace"], 
       },
     },
-    dropShadow: {
-      "contrast": "0 0 10px rgba(0, 0, 0, 1)",
+    screens: {
+      "sm": "800px", 
+      "xs": "450px"
     }, 
+    animation: {
+      "bounce": "bounce 1s infinite", 
+      "bounce-rightward": "bounceRightward 1s infinite", 
+      "bob": "bob 7s infinite ease-in-out", 
+      "spin-slow": "spin 7s infinite linear"
+    }
   },
   plugins: [require("tailwind-gradient-mask-image")]
 }

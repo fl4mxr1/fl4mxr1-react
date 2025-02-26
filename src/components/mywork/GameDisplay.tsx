@@ -3,6 +3,9 @@ import GameSearch from "./GameSearch";
 
 import { AnimatePresence } from "motion/react";
 import { useMemo, useState } from "react";
+import { NavLink } from "react-router";
+
+import placeholderImg from "../../img/placeholder.png";
 
 interface Props {
 	filteringEnabled?: boolean;
@@ -30,7 +33,7 @@ const games = [
 	{
 		game: {
 			name: "Tesdting !!!11121ummmmm",
-			thumbnail: "src/img/placeholder.png",
+			thumbnail: placeholderImg,
 			link: "https://youtube.com/",
 		},
 		working: {
@@ -46,7 +49,7 @@ const games = [
 	{
 		game: {
 			name: "hajime no ippo",
-			thumbnail: "src/img/placeholder.png",
+			thumbnail: placeholderImg,
 			link: undefined,
 		},
 		working: {
@@ -126,9 +129,10 @@ const games = [
 	},
 ];
 
-const GameDisplayGrid = ({ filteringEnabled, previewOnly }: Props) => {
+const GameDisplay = ({ filteringEnabled, previewOnly }: Props) => {
 	const [searchPrompt, setSearchPrompt] = useState("");
 	const gamesToDisplay = useMemo(() => {
+		if (searchPrompt == "") return games;
 		const filtered: GameInfo[] = [];
 		const loweredSearchPrompt = searchPrompt.toLowerCase();
 		games.forEach((v, k) => {
@@ -137,17 +141,24 @@ const GameDisplayGrid = ({ filteringEnabled, previewOnly }: Props) => {
 				filtered[k] = v;
 			}
 		});
+		console.log(filtered);
 		return filtered;
 	}, [searchPrompt]);
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		console.log(e.target.value);
 		setSearchPrompt(e.target.value);
 	};
-	console.log(previewOnly);
 	return (
-		<div>
+		<div className="relative flex flex-col items-center *:max-sm:max-w-[455px]">
 			{filteringEnabled && <GameSearch onChange={onChange} />}
-			<div className="grid grid-cols-2 max-sm:grid-cols-1 auto-rows-min max-sm:max-w-[455px] gap-2 h-[900px] overflow-hidden">
+			<div
+				className={`grid grid-cols-2 max-sm:grid-cols-1 w-full auto-rows-min gap-2 ${
+					previewOnly
+						? "h-[800px] overflow-hidden gradient-mask-b-[black,black_70%,transparent_100%]"
+						: ""
+				}`}
+			>
 				<AnimatePresence>
 					{gamesToDisplay.map((v, k) => {
 						return (
@@ -159,8 +170,28 @@ const GameDisplayGrid = ({ filteringEnabled, previewOnly }: Props) => {
 					})}
 				</AnimatePresence>
 			</div>
+			{previewOnly && (
+				<NavLink
+					to="/mywork"
+					className="absolute p-2 hover:bg-green-50/5 hover:backdrop-blur-sm transition-all duration-200 rounded-md bottom-10 left-1/2 -translate-x-1/2 text-xl flex flex-row gap-1 items-center"
+				>
+					see more of my work
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 16 16"
+						fill="currentColor"
+						className="size-6 animate-bounce-rightward"
+					>
+						<path
+							fillRule="evenodd"
+							d="M6.22 4.22a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.75.75 0 0 1-1.06-1.06L8.94 8 6.22 5.28a.75.75 0 0 1 0-1.06Z"
+							clipRule="evenodd"
+						/>
+					</svg>
+				</NavLink>
+			)}
 		</div>
 	);
 };
 
-export default GameDisplayGrid;
+export default GameDisplay;

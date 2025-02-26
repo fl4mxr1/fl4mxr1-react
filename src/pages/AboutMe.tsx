@@ -1,5 +1,7 @@
+import SiteWrapper from "../components/site_base/SiteWrapper";
+
 const AboutMe = () => {
-	return <div>AboutMe</div>;
+	return <SiteWrapper>About Me</SiteWrapper>;
 };
 
 export default AboutMe;

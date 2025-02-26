@@ -18,6 +18,7 @@
     "react-dom": "^18.3.1",
     "react-mdr": "^0.1.5",
     "react-router": "^7.1.5",
+    "react-twemoji": "^0.6.0",
     "tailwind-gradient-mask-image": "^1.2.0"
   },
   "devDependencies": {

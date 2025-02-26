@@ -1,7 +1,7 @@
 import OverflowLabel from "../OverflowLabel";
 import Button from "../Button";
 import Tooltip from "../Tooltip";
-import Modal from "../Modal";
+import RedirectionModal from "../RedirectionModal";
 
 import { motion } from "motion/react";
 import { useState } from "react";
@@ -27,20 +27,32 @@ interface Props {
 	gameInfo: GameInfoProp;
 }
 
+const variants = {
+	init: {
+		opacity: 0,
+		y: 10,
+	},
+	exit: {
+		opacity: 0,
+		transition: {
+			duration: 0.2,
+		},
+	},
+	animate: {
+		opacity: 1,
+		y: 0,
+	},
+};
+
 const GameDisplayItem = ({ gameInfo }: Props) => {
 	const [linkConfirmModalOn, setLinkConfirmModalOn] = useState(false);
 	return (
 		<motion.div
-			className="bg-black border-2 border-green rounded-xl aspect-[10/7] relative"
-			initial={{
-				opacity: 0,
-				y: 10,
-			}}
-			exit={{
-				scale: 1.2,
-				opacity: 0,
-			}}
-			animate={{ opacity: 1, y: 0, rotateY: 0 }}
+			className="bg-black border-2 border-green rounded-xl aspect-[10/7] relative overflow-y-hidden"
+			variants={variants}
+			initial="init"
+			exit="exit"
+			animate="animate"
 			layout
 			transition={{
 				type: "spring",
@@ -70,9 +82,9 @@ const GameDisplayItem = ({ gameInfo }: Props) => {
 					>
 						<Button
 							onClick={() => {
-								//window.open(gameInfo.game.link);
 								setLinkConfirmModalOn(true);
 							}}
+							disabled={true}
 						>
 							CHECK IT OUT!
 							<svg
@@ -91,36 +103,11 @@ const GameDisplayItem = ({ gameInfo }: Props) => {
 					</div>
 				</div>
 			</div>
-			<Modal
-				title={<>Confirmation</>}
-				buttons={
-					<>
-						<Button
-							onClick={() => {
-								window.open(gameInfo.game.link);
-								setLinkConfirmModalOn(false);
-							}}
-						>
-							yeah
-						</Button>
-						<Button
-							priority={1}
-							onClick={() => {
-								setLinkConfirmModalOn(false);
-							}}
-						>
-							nuh uh
-						</Button>
-					</>
-				}
+			<RedirectionModal
 				visible={linkConfirmModalOn}
-			>
-				this link is taking you to the following page:
-				<div className="px-3 py-2 my-3 bg-green/5 rounded-full">
-					{gameInfo.game.link}
-				</div>
-				are you <i>sure</i> you'd like to go?
-			</Modal>
+				setVisible={setLinkConfirmModalOn}
+				link={gameInfo.game.link}
+			/>
 		</motion.div>
 	);
 };

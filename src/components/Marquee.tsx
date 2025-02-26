@@ -65,8 +65,9 @@ const Marquee = ({
 						"--content-width": `${contentWidthPx}px`,
 						animation: `scrollContent${
 							invert ? "Invert" : ""
-						} ${animationDuration}s linear infinite`,
-						animationPlayState: stopOnHover ? animState : "running",
+						} ${animationDuration}s linear infinite ${
+							stopOnHover ? animState : "running"
+						}`,
 					} as React.CSSProperties
 				}
 			>

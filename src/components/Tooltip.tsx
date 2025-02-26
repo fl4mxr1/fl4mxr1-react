@@ -50,7 +50,7 @@ const Tooltip = ({
 	const hover = useHover(context);
 	const { getReferenceProps, getFloatingProps } = useInteractions([hover]);
 	const { isMounted, styles } = useTransitionStyles(context, {
-		duration: 200,
+		duration: 300,
 		common: ({ side }) => ({
 			transformOrigin: {
 				top: "bottom",
@@ -89,6 +89,7 @@ const Tooltip = ({
 					ref={refs.setFloating}
 					style={floatingStyles}
 					{...getFloatingProps()}
+					className="z-[9999]"
 				>
 					<div
 						style={{ ...styles }}
